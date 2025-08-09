@@ -1,44 +1,49 @@
  Comandi Base per Debian 12.11.0
+
 🗂 Gestione File e Directory
-Comando	Descrizione
-ls	Elenca file e directory
-ls -l	Elenca in formato lungo (permessi, proprietario, dimensione)
-cd <directory>	Cambia directory
-pwd	Mostra la directory corrente
-mkdir <nome_dir>	Crea una directory
-rm <file>	Elimina un file
-rm -r <directory>	Elimina una directory ricorsivamente
-cp <origine> <destinazione>	Copia file/directory
-mv <origine> <destinazione>	Sposta o rinomina file/directory
-cat <file>	Mostra il contenuto di un file
-nano <file>	Modifica un file con Nano (editor di testo semplice)
-chmod +x <file>	Rende un file eseguibile
+Comando	                     Descrizione
+ls	                          Elenca file e directory
+ls -l	                       Elenca in formato lungo (permessi, proprietario, dimensione)
+cd <directory>	              Cambia directory
+pwd	                         Mostra la directory corrente
+mkdir <nome_dir>	            Crea una directory
+rm <file>	                   Elimina un file
+rm -r <directory>           	Elimina una directory ricorsivamente
+cp <origine> <destinazione>	 Copia file/directory
+mv <origine> <destinazione>	 Sposta o rinomina file/directory
+cat <file>	                  Mostra il contenuto di un file
+nano <file>	                 Modifica un file con Nano (editor di testo semplice)
+chmod +x <file>	             Rende un file eseguibile
+
 📦 Gestione Pacchetti (APT)
-Comando	Descrizione
-sudo apt update	Aggiorna la lista dei pacchetti disponibili
-sudo apt upgrade	Installa aggiornamenti dei pacchetti
+Comando	                     Descrizione
+sudo apt update	             Aggiorna la lista dei pacchetti disponibili
+sudo apt upgrade	            Installa aggiornamenti dei pacchetti
 sudo apt install <pacchetto>	Installa un pacchetto
-sudo apt remove <pacchetto>	Disinstalla un pacchetto
-sudo apt autoremove	Rimuove pacchetti non più necessari
-sudo apt search <termine>	Cerca un pacchetto
-sudo apt list --installed	Elenca i pacchetti installati
+sudo apt remove <pacchetto>	 Disinstalla un pacchetto
+sudo apt autoremove	         Rimuove pacchetti non più necessari
+sudo apt search <termine>	   Cerca un pacchetto
+sudo apt list --installed	   Elenca i pacchetti installati
+
 🖥 Gestione Sistema
-Comando	Descrizione
-sudo reboot	Riavvia il sistema
-sudo shutdown -h now	Spegne il sistema immediatamente
-top / htop	Monitora processi e risorse
-df -h	Mostra spazio su disco
-free -h	Mostra utilizzo RAM
-uname -a	Mostra informazioni sul kernel
-ip a	Mostra indirizzi IP e interfacce di rete
-systemctl status <servizio>	Controlla lo stato di un servizio
+Comando	                     Descrizione
+sudo reboot	                 Riavvia il sistema
+sudo shutdown -h now	        Spegne il sistema immediatamente
+top / htop	                  Monitora processi e risorse
+df -h	                       Mostra spazio su disco
+free -h	                     Mostra utilizzo RAM
+uname -a	                    Mostra informazioni sul kernel
+ip a	                        Mostra indirizzi IP e interfacce di rete
+systemctl status <servizio>	 Controlla lo stato di un servizio
+
 👤 Utenti e Permessi
-Comando	Descrizione
-sudo su	Passa a root (superutente)
-whoami	Mostra l'utente corrente
-passwd	Cambia password dell'utente corrente
-sudo useradd <nome_utente>	Aggiunge un nuovo utente
-sudo usermod -aG sudo <nome_utente>	Aggiunge un utente al gruppo sudo
+Comando	                              Descrizione
+sudo su	                              Passa a root (superutente)
+whoami	                               Mostra l'utente corrente
+passwd	                               Cambia password dell'utente corrente
+sudo useradd <nome_utente>	           Aggiunge un nuovo utente
+sudo usermod -aG sudo <nome_utente>	  Aggiunge un utente al gruppo sudo
+
 🔌 Spegnimento Graceful della VM Linux
 Per spegnere correttamente una macchina virtuale Linux (senza rischiare corruzione dei dati), usa uno di questi comandi:
 
