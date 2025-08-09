@@ -1,0 +1,75 @@
+ Comandi Base per Debian 12.11.0
+🗂 Gestione File e Directory
+Comando	Descrizione
+ls	Elenca file e directory
+ls -l	Elenca in formato lungo (permessi, proprietario, dimensione)
+cd <directory>	Cambia directory
+pwd	Mostra la directory corrente
+mkdir <nome_dir>	Crea una directory
+rm <file>	Elimina un file
+rm -r <directory>	Elimina una directory ricorsivamente
+cp <origine> <destinazione>	Copia file/directory
+mv <origine> <destinazione>	Sposta o rinomina file/directory
+cat <file>	Mostra il contenuto di un file
+nano <file>	Modifica un file con Nano (editor di testo semplice)
+chmod +x <file>	Rende un file eseguibile
+📦 Gestione Pacchetti (APT)
+Comando	Descrizione
+sudo apt update	Aggiorna la lista dei pacchetti disponibili
+sudo apt upgrade	Installa aggiornamenti dei pacchetti
+sudo apt install <pacchetto>	Installa un pacchetto
+sudo apt remove <pacchetto>	Disinstalla un pacchetto
+sudo apt autoremove	Rimuove pacchetti non più necessari
+sudo apt search <termine>	Cerca un pacchetto
+sudo apt list --installed	Elenca i pacchetti installati
+🖥 Gestione Sistema
+Comando	Descrizione
+sudo reboot	Riavvia il sistema
+sudo shutdown -h now	Spegne il sistema immediatamente
+top / htop	Monitora processi e risorse
+df -h	Mostra spazio su disco
+free -h	Mostra utilizzo RAM
+uname -a	Mostra informazioni sul kernel
+ip a	Mostra indirizzi IP e interfacce di rete
+systemctl status <servizio>	Controlla lo stato di un servizio
+👤 Utenti e Permessi
+Comando	Descrizione
+sudo su	Passa a root (superutente)
+whoami	Mostra l'utente corrente
+passwd	Cambia password dell'utente corrente
+sudo useradd <nome_utente>	Aggiunge un nuovo utente
+sudo usermod -aG sudo <nome_utente>	Aggiunge un utente al gruppo sudo
+🔌 Spegnimento Graceful della VM Linux
+Per spegnere correttamente una macchina virtuale Linux (senza rischiare corruzione dei dati), usa uno di questi comandi:
+
+1. Comando shutdown (preferito)
+bash
+sudo shutdown -h now  # Spegne immediatamente
+Oppure con un ritardo (es. 5 minuti):
+
+bash
+sudo shutdown -h +5  # Spegne dopo 5 minuti
+2. Comando poweroff
+bash
+sudo poweroff  # Spegne direttamente
+3. Comando init (metodo legacy)
+bash
+sudo init 0  # Spegne il sistema (equivalente a `poweroff`)
+4. Da VirtualBox (se il sistema è bloccato)
+Se la VM non risponde, puoi:
+
+Salvare lo stato (menu Macchina > Salva stato)
+
+Spegnere forzatamente (menu Macchina > Arresta)
+
+🔹 Extra: Comandi utili per VM
+Verifica se sei in una VM:
+
+bash
+sudo dmidecode -s system-product-name
+(Dovresti vedere VirtualBox, VMware, o QEMU se sei in una VM).
+
+Installa gli strumenti della VM (se necessario):
+
+bash
+sudo apt install virtualbox-guest-utils virtualbox-guest-dkms
