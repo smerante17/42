@@ -1,0 +1,16 @@
+How to install the Unix FireWall
+
+Firewall
+Once you are logged into SSH, switch to the root user by typing: su -
+
+To enhance the server's security, we'll set up a firewall using UFW (Uncomplicated Firewall). UFW is user-friendly and effective for managing firewall rules. Let's start by installing UFW:
+
+apt install ufw | Installs UFW.
+
+ufw default deny incoming | Blocks all incoming requests.
+
+ufw default allow outgoing | Allows all outgoing requests.
+
+ufw allow 4242 | Allow incoming traffic on port 4242. tThis is crucial to ensure you can still access your server via SSH.
+
+ufw enable | Enables UFW.
