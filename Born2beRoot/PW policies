@@ -1,0 +1,39 @@
+smerante@smerante42:~$ cd ~/etc/login.defs
+-bash: cd: /home/smerante/etc/login.defs: No such file or directory
+smerante@smerante42:~$ nano ~/etc/login.defs
+smerante@smerante42:~$ ls
+smerante@smerante42:~$ ls -l -a
+total 28
+drwx------ 3 smerante smerante 4096 Aug 14 16:07 .
+drwxr-xr-x 4 root     root     4096 Aug 11 15:44 ..
+-rw------- 1 smerante smerante  143 Aug 14 16:04 .bash_history
+-rw-r--r-- 1 smerante smerante  220 Aug 11 15:44 .bash_logout
+-rw-r--r-- 1 smerante smerante 3526 Aug 11 15:44 .bashrc
+drwxr-xr-x 3 smerante smerante 4096 Aug 14 16:07 .local
+-rw-r--r-- 1 smerante smerante  807 Aug 11 15:44 .profile
+-rw-r--r-- 1 smerante smerante    0 Aug 14 16:05 .sudo_as_admin_successful
+smerante@smerante42:~$ cd ..
+smerante@smerante42:/home$ ls -l -a
+total 28
+drwxr-xr-x  4 root     root      4096 Aug 11 15:44 .
+drwxr-xr-x 18 root     root      4096 Aug 11 15:41 ..
+drwx------  2 root     root     16384 Aug 11 15:32 lost+found
+drwx------  3 smerante smerante  4096 Aug 14 16:07 smerante
+smerante@smerante42:/home$ cd ..
+smerante@smerante42:/$ ls
+bin   dev  home        initrd.img.old  lib64       media  opt   root  sbin  sys  usr  vmlinuz
+boot  etc  initrd.img  lib             lost+found  mnt    proc  run   srv   tmp  var  vmlinuz.old
+smerante@smerante42:/$ cd etc/
+smerante@smerante42:/etc$ cd log
+login.defs      logrotate.conf  logrotate.d/    
+smerante@smerante42:/etc$ cd login.defs 
+-bash: cd: login.defs: Not a directory
+smerante@smerante42:/etc$ nano login.defs 
+smerante@smerante42:/etc$ sudo nano login.defs 
+smerante@smerante42:/etc$ chage -M 30 smerante
+chage: Permission denied.
+smerante@smerante42:/etc$ sudo chage -M 30 smerante
+smerante@smerante42:/etc$ sudo chage -m 2 smerante
+smerante@smerante42:/etc$ sudo chage -m 2 root
+smerante@smerante42:/etc$ sudo chage -M 30 root
+smerante@smerante42:/etc$
