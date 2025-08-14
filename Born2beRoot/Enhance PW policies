@@ -1,0 +1,97 @@
+smerante@smerante42:/etc$ sudo apt install libpam-pwquality
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  cracklib-runtime file libcrack2 libmagic-mgc libmagic1 libpwquality-common libpwquality1 wamerican
+The following NEW packages will be installed:
+  cracklib-runtime file libcrack2 libmagic-mgc libmagic1 libpam-pwquality libpwquality-common libpwquality1
+  wamerican
+0 upgraded, 9 newly installed, 0 to remove and 0 not upgraded.
+Need to get 936 kB of archives.
+After this operation, 11.1 MB of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+Get:1 http://deb.debian.org/debian bookworm/main amd64 libmagic-mgc amd64 1:5.44-3 [305 kB]
+Get:2 http://deb.debian.org/debian bookworm/main amd64 libmagic1 amd64 1:5.44-3 [104 kB]
+Get:3 http://deb.debian.org/debian bookworm/main amd64 file amd64 1:5.44-3 [42.5 kB]
+Get:4 http://deb.debian.org/debian bookworm/main amd64 wamerican all 2020.12.07-2 [221 kB]
+Get:5 http://deb.debian.org/debian bookworm/main amd64 libcrack2 amd64 2.9.6-5+b1 [44.0 kB]
+Get:6 http://deb.debian.org/debian bookworm/main amd64 cracklib-runtime amd64 2.9.6-5+b1 [143 kB]
+Get:7 http://deb.debian.org/debian bookworm/main amd64 libpwquality-common all 1.4.5-1 [51.3 kB]
+Get:8 http://deb.debian.org/debian bookworm/main amd64 libpwquality1 amd64 1.4.5-1+b1 [12.8 kB]
+Get:9 http://deb.debian.org/debian bookworm/main amd64 libpam-pwquality amd64 1.4.5-1+b1 [12.9 kB]
+Fetched 936 kB in 0s (7,614 kB/s)      
+Preconfiguring packages ...
+Selecting previously unselected package libmagic-mgc.
+(Reading database ... 22327 files and directories currently installed.)
+Preparing to unpack .../0-libmagic-mgc_1%3a5.44-3_amd64.deb ...
+Unpacking libmagic-mgc (1:5.44-3) ...
+Selecting previously unselected package libmagic1:amd64.
+Preparing to unpack .../1-libmagic1_1%3a5.44-3_amd64.deb ...
+Unpacking libmagic1:amd64 (1:5.44-3) ...
+Selecting previously unselected package file.
+Preparing to unpack .../2-file_1%3a5.44-3_amd64.deb ...
+Unpacking file (1:5.44-3) ...
+Selecting previously unselected package wamerican.
+Preparing to unpack .../3-wamerican_2020.12.07-2_all.deb ...
+Unpacking wamerican (2020.12.07-2) ...
+Selecting previously unselected package libcrack2:amd64.
+Preparing to unpack .../4-libcrack2_2.9.6-5+b1_amd64.deb ...
+Unpacking libcrack2:amd64 (2.9.6-5+b1) ...
+Selecting previously unselected package cracklib-runtime.
+Preparing to unpack .../5-cracklib-runtime_2.9.6-5+b1_amd64.deb ...
+Unpacking cracklib-runtime (2.9.6-5+b1) ...
+Selecting previously unselected package libpwquality-common.
+Preparing to unpack .../6-libpwquality-common_1.4.5-1_all.deb ...
+Unpacking libpwquality-common (1.4.5-1) ...
+Selecting previously unselected package libpwquality1:amd64.
+Preparing to unpack .../7-libpwquality1_1.4.5-1+b1_amd64.deb ...
+Unpacking libpwquality1:amd64 (1.4.5-1+b1) ...
+Selecting previously unselected package libpam-pwquality:amd64.
+Preparing to unpack .../8-libpam-pwquality_1.4.5-1+b1_amd64.deb ...
+Unpacking libpam-pwquality:amd64 (1.4.5-1+b1) ...
+Setting up libpwquality-common (1.4.5-1) ...
+Setting up libmagic-mgc (1:5.44-3) ...
+Setting up libmagic1:amd64 (1:5.44-3) ...
+Setting up file (1:5.44-3) ...
+Setting up wamerican (2020.12.07-2) ...
+Setting up libcrack2:amd64 (2.9.6-5+b1) ...
+Setting up cracklib-runtime (2.9.6-5+b1) ...
+Setting up libpwquality1:amd64 (1.4.5-1+b1) ...
+Setting up libpam-pwquality:amd64 (1.4.5-1+b1) ...
+Processing triggers for libc-bin (2.36-9+deb12u10) ...
+smerante@smerante42:/etc$ ls
+adduser.conf            debian_version          initramfs-tools  modprobe.d      rc2.d        sudo.conf
+adjtime                 default                 inputrc          modules         rc3.d        sudoers
+alternatives            deluser.conf            iproute2         modules-load.d  rc4.d        sudoers.d
+apparmor                dhcp                    issue            motd            rc5.d        sudo_logsrvd.conf
+apparmor.d              discover.conf.d         issue.net        mtab            rc6.d        sv
+apt                     discover-modprobe.conf  kernel           nanorc          rcS.d        sysctl.conf
+bash.bashrc             dpkg                    kernel-img.conf  netconfig       resolv.conf  sysctl.d
+bindresvport.blacklist  e2scrub.conf            ld.so.cache      network         rmt          systemd
+binfmt.d                environment             ld.so.conf       networks        rpc          terminfo
+ca-certificates         ethertypes              ld.so.conf.d     nftables.conf   rsyslog.d    timezone
+ca-certificates.conf    fstab                   libaudit.conf    nsswitch.conf   runit        tmpfiles.d
+console-setup           gai.conf                locale.alias     opt             security     ucf.conf
+cracklib                group                   locale.gen       os-release      selinux      udev
+cron.d                  group-                  localtime        pam.conf        services     ufw
+cron.daily              grub.d                  logcheck         pam.d           shadow       update-motd.d
+cron.hourly             gshadow                 login.defs       passwd          shadow-      vim
+cron.monthly            gshadow-                logrotate.conf   passwd-         shells       X11
+crontab                 gss                     logrotate.d      profile         skel         xattr.conf
+cron.weekly             host.conf               lvm              profile.d       ssh          xdg
+cron.yearly             hostname                machine-id       protocols       ssl
+cryptsetup-initramfs    hosts                   magic            python3         subgid
+crypttab                hosts.allow             magic.mime       python3.11      subgid-
+dbus-1                  hosts.deny              mime.types       rc0.d           subuid
+debconf.conf            init.d                  mke2fs.conf      rc1.d           subuid-
+smerante@smerante42:/etc$ nano pam.d/common-password 
+smerante@smerante42:/etc$ sudo nano pam.d/common-password 
+smerante@smerante42:/etc$ password smerante
+-bash: password: command not found
+smerante@smerante42:/etc$ passwd smerante
+Changing password for smerante.
+Current password: 
+New password: 
+Retype new password: 
+passwd: password updated successfully
