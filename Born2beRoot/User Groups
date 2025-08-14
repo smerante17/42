@@ -1,0 +1,111 @@
+root@smerante42:~# groupadd user42
+root@smerante42:~# 
+root@smerante42:~# usermod -a -
+usermod: user '-' does not exist
+root@smerante42:~# usermod -a -G user42,sudo smerante
+root@smerante42:~# ls
+root@smerante42:~# ls -l -a
+total 32
+drwx------  4 root root 4096 Aug 14 15:57 .
+drwxr-xr-x 18 root root 4096 Aug 11 15:41 ..
+-rw-------  1 root root  699 Aug 14 15:19 .bash_history
+-rw-r--r--  1 root root  571 Apr 10  2021 .bashrc
+-rw-------  1 root root   20 Aug 14 15:57 .lesshst
+drwxr-xr-x  3 root root 4096 Aug 11 15:55 .local
+-rw-r--r--  1 root root  161 Jul  9  2019 .profile
+drwx------  2 root root 4096 Aug 11 15:40 .ssh
+root@smerante42:~# cd ..
+root@smerante42:/# ls
+bin   dev  home        initrd.img.old  lib64	   media  opt	root  sbin  sys  usr  vmlinuz
+boot  etc  initrd.img  lib	       lost+found  mnt	  proc	run   srv   tmp  var  vmlinuz.old
+root@smerante42:/# cd etc/
+root@smerante42:/etc# ls
+adduser.conf		discover.conf.d		ld.so.cache	pam.conf     shells
+adjtime			discover-modprobe.conf	ld.so.conf	pam.d	     skel
+alternatives		dpkg			ld.so.conf.d	passwd	     ssh
+apparmor		e2scrub.conf		libaudit.conf	passwd-      ssl
+apparmor.d		environment		locale.alias	profile      subgid
+apt			ethertypes		locale.gen	profile.d    subgid-
+bash.bashrc		fstab			localtime	protocols    subuid
+bindresvport.blacklist	gai.conf		login.defs	python3      subuid-
+binfmt.d		group			logrotate.conf	python3.11   sudo.conf
+ca-certificates		group-			logrotate.d	rc0.d	     sudoers
+ca-certificates.conf	grub.d			lvm		rc1.d	     sudoers.d
+console-setup		gshadow			machine-id	rc2.d	     sudo_logsrvd.conf
+cron.d			gshadow-		mime.types	rc3.d	     sv
+cron.daily		gss			mke2fs.conf	rc4.d	     sysctl.conf
+cron.hourly		host.conf		modprobe.d	rc5.d	     sysctl.d
+cron.monthly		hostname		modules		rc6.d	     systemd
+crontab			hosts			modules-load.d	rcS.d	     terminfo
+cron.weekly		hosts.allow		motd		resolv.conf  timezone
+cron.yearly		hosts.deny		mtab		rmt	     tmpfiles.d
+cryptsetup-initramfs	init.d			nanorc		rpc	     ucf.conf
+crypttab		initramfs-tools		netconfig	rsyslog.d    udev
+dbus-1			inputrc			network		runit	     ufw
+debconf.conf		iproute2		networks	security     update-motd.d
+debian_version		issue			nftables.conf	selinux      vim
+default			issue.net		nsswitch.conf	services     X11
+deluser.conf		kernel			opt		shadow	     xattr.conf
+dhcp			kernel-img.conf		os-release	shadow-      xdg
+root@smerante42:/etc# cd g
+-bash: cd: g: No such file or directory
+root@smerante42:/etc# cd group
+-bash: cd: group: Not a directory
+root@smerante42:/etc# cd group
+group   group-  
+root@smerante42:/etc# cd group
+-bash: cd: group: Not a directory
+root@smerante42:/etc# cd group-
+-bash: cd: group-: Not a directory
+root@smerante42:/etc# cat group
+root:x:0:
+daemon:x:1:
+bin:x:2:
+sys:x:3:
+adm:x:4:
+tty:x:5:
+disk:x:6:
+lp:x:7:
+mail:x:8:
+news:x:9:
+uucp:x:10:
+man:x:12:
+proxy:x:13:
+kmem:x:15:
+dialout:x:20:
+fax:x:21:
+voice:x:22:
+cdrom:x:24:smerante
+floppy:x:25:smerante
+tape:x:26:
+sudo:x:27:smerante
+audio:x:29:smerante
+dip:x:30:smerante
+www-data:x:33:
+backup:x:34:
+operator:x:37:
+list:x:38:
+irc:x:39:
+src:x:40:
+shadow:x:42:
+utmp:x:43:
+video:x:44:smerante
+sasl:x:45:
+plugdev:x:46:smerante
+staff:x:50:
+games:x:60:
+users:x:100:smerante
+nogroup:x:65534:
+systemd-journal:x:999:
+systemd-network:x:998:
+crontab:x:101:
+input:x:102:
+sgx:x:103:
+kvm:x:104:
+render:x:105:
+netdev:x:106:smerante
+smerante:x:1000:
+messagebus:x:107:
+_ssh:x:108:
+user42:x:1001:smerante
+root@smerante42:/etc# 
