@@ -98,3 +98,28 @@ passwd: password updated successfully
 
 changes to the file at password        requisite:  
 pam_pwquality.so retry=3 minlen=10 difok=7 maxrepeat=3 dcredit=-1 ucredit=-1 lcredit=-1 reject_username enforce_for_root
+
+Details:
+retry | Maximum amount of incorrect attempts.
+
+minlen | Minimum acceptable size for the new password.
+
+difok | Number of characters in the new password that must not be present in the old password. Even with enforce_for_root, this rule doesn't apply to the root user since the old password is not required to change it.
+
+maxrepeat | The maximum number of allowed same consecutive characters in the new password.
+
+dcredit | Minimum number of digits in the new password. (negative value)
+
+ucredit | Minimum number of uppercase characters in the new password. (negative value)
+
+lcredit | Minimum number of lowercase characters in the new password. (negative value)
+
+reject_username | The new password cannot include the username.
+
+enforce_for_root | Applies rules to root.
+
+With the new rules enforced, update the passwords for both your user account and the root account:
+
+passwd <user> | Changes the password of the chlimous user.
+
+
