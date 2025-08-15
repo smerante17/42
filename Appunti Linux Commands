@@ -122,20 +122,19 @@ File	          Descrizione
 📝 Esempi Pratici
 
 Creare un utente e dargli i permessi sudo
-
 bash
 sudo adduser mario
 sudo usermod -aG sudo mario
-Aggiungere un utente a un gruppo esistente
 
+Aggiungere un utente a un gruppo esistente
 bash
 sudo usermod -aG developers mario
-Cambiare il proprietario di una cartella
 
+Cambiare il proprietario di una cartella
 bash
 sudo chown mario:developers /var/www/
-Eliminare un utente e la sua home
 
+Eliminare un utente e la sua home
 bash
 sudo userdel -r mario
 
