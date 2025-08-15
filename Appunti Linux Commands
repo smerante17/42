@@ -78,3 +78,70 @@ Installa gli strumenti della VM (se necessario):
 
 bash
 sudo apt install virtualbox-guest-utils virtualbox-guest-dkms
+
+Ecco una lista dei comandi più utilizzati per gestire utenti, gruppi e permessi in Linux:
+
+📌 GESTIONE UTENTI
+
+Comando	 Descrizione	                                       Esempio
+useradd	 Crea un nuovo utente (senza home di default)	      sudo useradd -m nome_utente
+adduser	 Crea un utente in modo interattivo (Debian/Ubuntu)	sudo adduser nome_utente
+passwd	  Cambia la password di un utente	                   sudo passwd nome_utente
+usermod	 Modifica un utente esistente	                      sudo usermod -aG sudo nome_utente
+userdel	 Elimina un utente	                                 sudo userdel -r nome_utente (-r cancella la home)
+id	      Mostra UID, GID e gruppi di un utente	             id nome_utente
+who / w	 Mostra gli utenti attualmente connessi	            who
+last	    Visualizza la cronologia degli accessi	            last
+
+📌 GESTIONE GRUPPI
+
+Comando	  Descrizione	                          Esempio
+groupadd	Crea un nuovo gruppo	                  sudo groupadd nome_gruppo
+groupdel	Elimina un gruppo	                     sudo groupdel nome_gruppo
+usermod -aG	Aggiunge un utente a un gruppo	     sudo usermod -aG sudo nome_utente
+gpasswd	Gestisce i membri di un gruppo	         sudo gpasswd -a nome_utente nome_gruppo
+groups	Mostra i gruppi di un utente	            groups nome_utente
+getent group	Elenca tutti i gruppi del sistema	 getent group
+
+📌 VISUALIZZAZIONE E MODIFICA DEI PERMESSI
+
+Comando	 Descrizione	                                          Esempio
+chown	   Cambia il proprietario di un file/directory	          sudo chown nome_utente:gruppo file.txt
+chgrp	   Cambia il gruppo di un file/directory	                sudo chgrp gruppo file.txt
+chmod	   Cambia i permessi (lettura, scrittura, esecuzione)	   chmod 755 script.sh
+ls -l	   Mostra proprietario, gruppo e permessi	               ls -l /home/
+
+📌 FILE IMPORTANTI
+
+File	          Descrizione
+/etc/passwd	   Contiene gli utenti del sistema
+/etc/shadow	   Memorizza le password cifrate
+/etc/group	    Elenca tutti i gruppi
+/etc/sudoers	  Definisce chi può usare sudo
+
+📝 Esempi Pratici
+
+Creare un utente e dargli i permessi sudo
+
+bash
+sudo adduser mario
+sudo usermod -aG sudo mario
+Aggiungere un utente a un gruppo esistente
+
+bash
+sudo usermod -aG developers mario
+Cambiare il proprietario di una cartella
+
+bash
+sudo chown mario:developers /var/www/
+Eliminare un utente e la sua home
+
+bash
+sudo userdel -r mario
+
+🔐 Best Practices
+
+✔ Usa adduser su Debian/Ubuntu (più semplice).
+✔ Usa -aG con usermod per evitare di rimuovere altri gruppi.
+✔ Non modificare manualmente /etc/passwd o /etc/shadow (usa i comandi ufficiali).
+✔ Verifica sempre con id e groups prima di assegnare permessi.
