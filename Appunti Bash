@@ -1,0 +1,237 @@
+📋 INDICE DEI COMANDI
+grep - Ricerca testo
+
+find - Ricerca file
+
+awk - Elaborazione testo
+
+sed - Sostituzione testo
+
+sort - Ordinamento
+
+wc - Conteggio
+
+cut - Estrazione colonne
+
+uniq - Rimozione duplicati
+
+head & tail - Prime/ultime linee
+
+xargs - Esecuzione comandi
+
+tee - Doppio output
+
+tr - Traduzione caratteri
+
+1. GREP (Global Regular Expression Print)
+Cerca pattern in file o testo
+
+Sintassi base:
+bash
+grep [opzioni] pattern [file...]
+Esempi pratici:
+bash
+# Ricerca semplice
+grep "errore" file.log          # Cerca "errore" nel file
+grep -i "errore" file.log       # Case insensitive
+grep -r "errore" /cartella/     # Ricorsiva nelle sottocartelle
+
+# Ricerca con regex
+grep "^inizio" file.txt         # Linee che iniziano con "inizio"
+grep "fine$" file.txt           # Linee che terminano con "fine"
+grep -E "[0-9]{3}" file.txt     # Regex estesa (3 cifre)
+
+# Contesto attorno alla ricerca
+grep -C 2 "errore" file.log     # Mostra 2 linee prima e dopo
+grep -B 3 "errore" file.log     # 3 linee prima
+grep -A 1 "errore" file.log     # 1 linea dopo
+
+# Altre opzioni utili
+grep -v "successo" file.log     # Invert match (tutto tranne)
+grep -c "errore" file.log       # Conta occorrenze
+grep -n "errore" file.log       # Mostra numero linea
+grep -l "errore" *.log          # Mostra solo nomi file
+2. FIND (Cerca file)
+Trova file e directory
+
+Sintassi:
+bash
+find [path] [espressioni]
+Esempi pratici:
+bash
+# Ricerca base
+find . -name "*.txt"            # Cerca file .txt nella cartella corrente
+find /home -name "config.*"     # Cerca file che iniziano con "config"
+find . -iname "*.TXT"           # Case insensitive
+
+# Per tipo e dimensione
+find . -type f -size +1M        # File più grandi di 1MB
+find . -type d -name "dir*"     # Solo directory
+find . -size -100k              # File più piccoli di 100KB
+
+# Per tempo
+find . -mtime -7                # Modificati negli ultimi 7 giorni
+find . -mmin -30                # Modificati negli ultimi 30 minuti
+find . -atime +90               # Accesso oltre 90 giorni fa
+
+# Esecuzione comandi sui risultati
+find . -name "*.tmp" -delete    # Cancella file trovati
+find . -name "*.log" -exec cp {} /backup/ \;  # Copia in backup
+
+# Combinazioni complesse
+find . -name "*.php" -o -name "*.html"  # OR logico
+find . -name "*.txt" ! -name "temp*"    # NOT logico
+3. AWK (Elaborazione testo)
+Linguaggio per elaborazione dati
+
+Sintassi base:
+bash
+awk 'pattern {azione}' file
+Esempi pratici:
+bash
+# Stampa colonne
+awk '{print $1}' file.txt       # Prima colonna
+awk '{print $NF}' file.txt      # Ultima colonna
+awk '{print $2, $5}' file.txt   # Seconda e quinta colonna
+
+# Filtri condizionali
+awk '$3 > 100 {print $0}' file.txt  # Se terza colonna > 100
+awk '/errore/ {print $0}' file.log  # Solo linee con "errore"
+awk 'NR==5 {print}' file.txt    # Solo quinta linea
+
+# Calcoli
+awk '{sum += $1} END {print sum}' file.txt  # Somma prima colonna
+awk '{print NR ": " $0}' file.txt  # Numera le linee
+
+# Separatori personalizzati
+awk -F: '{print $1}' /etc/passwd  # Separatore :
+awk -F',' '{print $2}' file.csv   # Separatore ,
+
+# Script complessi
+awk 'BEGIN {FS=":"; OFS="->"} {print $1, $NF}' /etc/passwd
+4. SED (Stream Editor)
+Sostituzione e manipolazione testo
+
+Sintassi:
+bash
+sed 'comando' file
+Esempi pratici:
+bash
+# Sostituzione base
+sed 's/vecchio/nuovo/g' file.txt      # Sostituisce tutto
+sed 's/errore/ERRORE/' file.log       # Sostituisce prima occorrenza
+sed 's/|/,/g' file.csv                # Cambia separatore
+
+# Modifica su specifiche linee
+sed '5s/vecchio/nuovo/' file.txt      # Solo linea 5
+sed '1,10s/vecchio/nuovo/' file.txt   # Linee 1-10
+sed '/pattern/s/vecchio/nuovo/' file  # Solo linee con pattern
+
+# Altre operazioni
+sed -n '5,10p' file.txt              # Stampa solo linee 5-10
+sed '3d' file.txt                    # Elimina linea 3
+sed '/^#/d' file.txt                 # Elimina linee che iniziano con #
+
+# Modifica file in place
+sed -i 's/vecchio/nuovo/g' file.txt  # Modifica direttamente il file
+5. SORT (Ordinamento)
+Ordina linee di testo
+
+Esempi:
+bash
+sort file.txt                        # Ordinamento alfabetico
+sort -n file.txt                     # Ordinamento numerico
+sort -r file.txt                     # Ordinamento inverso
+sort -k2 file.txt                    # Ordina per seconda colonna
+sort -t: -k3 -n /etc/passwd          # Ordina per terzo campo numerico
+sort -u file.txt                     # Rimuovi duplicati
+sort file1.txt file2.txt             # Ordina file multipli
+6. WC (Word Count)
+Conta linee, parole, caratteri
+
+bash
+wc file.txt                         # Linee, parole, caratteri
+wc -l file.txt                      # Solo numero linee
+wc -w file.txt                      # Solo numero parole
+wc -c file.txt                      # Solo numero caratteri
+wc -L file.txt                      # Lunghezza linea più lunga
+ls | wc -l                          # Conta file in directory
+7. CUT (Estrazione colonne)
+Estrae sezioni da ogni linea
+
+bash
+cut -d: -f1 /etc/passwd            # Estrae primo campo (utenti)
+cut -d',' -f2,4 file.csv           # Estrae seconda e quarta colonna
+cut -c1-5 file.txt                 # Estrae caratteri 1-5
+cut -c10- file.txt                 # Estrae dal carattere 10 alla fine
+8. UNIQ (Rimozione duplicati)
+Rimuove o reporta linee duplicate
+
+bash
+sort file.txt | uniq               # Rimuove duplicati (deve essere ordinato)
+uniq -c file.txt                   # Conta occorrenze duplicate
+uniq -d file.txt                   # Mostra solo duplicati
+uniq -u file.txt                   # Mostra solo linee uniche
+9. HEAD & TAIL (Prime/ultime linee)
+bash
+head -n 10 file.txt                # Prime 10 linee
+tail -n 5 file.log                 # Ultime 5 linee
+tail -f file.log                   # Follow (aggiornamento in tempo reale)
+head -n 20 file.txt | tail -n 10   # Linee 11-20
+10. XARGS (Esecuzione comandi)
+Esegue comandi dall'input
+
+bash
+find . -name "*.txt" | xargs rm    # Cancella tutti i file .txt
+echo "file1 file2" | xargs cp -t /backup/  # Copia file in backup
+ls *.log | xargs -I {} mv {} /logs/  # Rinomina durante spostamento
+11. TEE (Doppio output)
+Scrive sia su stdout che su file
+
+bash
+ls -la | tee output.txt            # Mostra e salva in file
+ls -la | tee -a output.txt         # Append invece di sovrascrivere
+command 2>&1 | tee log.txt         # Salva sia stdout che stderr
+12. TR (Traduzione caratteri)
+Sostituisce o elimina caratteri
+
+bash
+echo "hello" | tr 'a-z' 'A-Z'      # HELLO (minuscolo → maiuscolo)
+echo "hello" | tr -d 'l'           # heo (rimuove tutte le 'l')
+echo "hello world" | tr ' ' '\n'   # Sostituisce spazi con newline
+🎯 COMBINAZIONI POTENTI
+1. Analisi log Apache
+bash
+grep "404" access.log | awk '{print $7}' | sort | uniq -c | sort -nr | head -10
+Trova le 10 pagine con più errori 404
+
+2. Monitoraggio processi
+bash
+ps aux | grep "nginx" | awk '{sum += $4} END {print sum "%"}'
+CPU totale utilizzata da processi nginx
+
+3. Pulizia automatica
+bash
+find /tmp -name "*.tmp" -mtime +30 -exec rm {} \; | tee -a cleanup.log
+Cancella file tmp più vecchi di 30 giorni e logga
+
+4. Analisi disco
+bash
+df -h | awk '+$5 > 80 {print $1 ": " $5}'
+Mostra solo filesystem con uso >80%
+
+5. Statistiche codice
+bash
+find . -name "*.py" -exec wc -l {} \; | awk '{sum += $1} END {print sum}'
+Conta linee totali di tutti i file Python
+
+💡 CONSIGLI PRATICI
+Testa sempre con echo prima di eseguire comandi distruttivi
+
+Usa -i per backup prima di modifiche (sed -i.bak)
+
+Combina comandi con | per elaborazioni complesse
+
+Documenta i comandi complessi nei tuoi script
+
+Usa man comando per la documentazione ufficiale
