@@ -3,45 +3,48 @@
 logger -t monitoring "Script started"
 
 show_info() {
-    # Kernel and OS information
+    # Architecture & Kernel
     ARCH=$(uname -srvmo)
 
-    # CPU information
+    # CPU info
     PCPU=$(grep "physical id" /proc/cpuinfo | sort -u | wc -l)
     VCPU=$(grep -c "^processor" /proc/cpuinfo)
 
-    # Memory usage (RAM)
+    # RAM usage
     RAM_TOTAL=$(free -m | awk '/Mem:/ {print $2}')
     RAM_USED=$(free -m | awk '/Mem:/ {print $3}')
     RAM_PERCENT=$((RAM_USED * 100 / RAM_TOTAL))
 
-    # Disk sum /dev/ and /dev/mapper, excluding /boot
-    DISK_STATS=$(df -B1 | awk '/^\/dev\/|^\/dev\/mapper/ && $6 != "/boot" {total+=$2; used+=$3} END {printf "%d %d %d\n", used, total, (total>0?used*100/total:0)}')
-    read DISK_USED DISK_TOTAL DISK_PERCENT <<< "$DISK_STATS"
+    # Disk usage: sum of /dev/* excluding /boot
+    read DISK_USED DISK_TOTAL < <(df --output=used,size -B1 | tail -n +2 | awk '{used+=$1; total+=$2} END {print used, total}')
+    # Convert to human-readable
     DISK_USED_H=$(numfmt --to=iec --suffix=B "$DISK_USED")
     DISK_TOTAL_H=$(numfmt --to=iec --suffix=B "$DISK_TOTAL")
+    DISK_PERCENT=$((DISK_USED * 100 / DISK_TOTAL))
 
-    # CPU load (1 min load average)
-    CPU_LOAD=$(uptime | awk -F'load average:' '{print $2}' | cut -d, -f1 | xargs)
+    # CPU load (1 minute)
+    CPU_LOAD=$(top -bn1 | grep "Cpu(s)" | awk -F'id,' '{print 100 - $1}' | awk '{print $1"%"}')
 
-    # System uptime
+    # Last boot
     LAST_BOOT=$(who -b | awk '{print $3 " " $4}')
 
     # LVM status
     LVM_STATUS=$(lsblk | grep -q "lvm" && echo "yes" || echo "no")
 
-    # Network information
+    # Active TCP connections
     TCP_CONN=$(ss -t state established | wc -l)
+
+    # Users logged
+    USER_LOG=$(users | wc -w)
+
+    # Network info
     IP_ADDR=$(hostname -I | awk '{print $1}')
     MAC_ADDR=$(ip link show | awk '/ether/ {print $2}' | head -n1)
 
-    # User information
-    USER_LOG=$(users | wc -w)
-
-    # Sudo commands count
+    # Sudo commands executed
     SUDO_LOG=$(journalctl _COMM=sudo | grep COMMAND | wc -l)
 
-    # Formatting message
+    # Format the message
     MESSAGE="
 #Architecture: $ARCH
 #CPU physical: $PCPU
@@ -56,16 +59,12 @@ show_info() {
 #Network: IP $IP_ADDR ($MAC_ADDR)
 #Sudo: $SUDO_LOG cmd"
 
-    # Broadcast to all active terminals safely
+    # Broadcast and log
     wall "$MESSAGE" 2>/dev/null
-
-    # Log to system journal
     logger -t monitoring "Monitoring executed"
 }
 
-# MAIN EXECUTION - Only run if users are logged in
-if [ $(who | wc -l) -gt 0 ]; then
-    show_info
-fi
+# Execute only if users are logged in
+[ $(who | wc -l) -gt 0 ] && show_info
 
 exit 0
