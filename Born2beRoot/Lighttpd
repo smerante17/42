@@ -1,0 +1,16 @@
+Lighttpd: is a web server designed to be fast, secure, flexible, 
+and standards-compliant. It is optimized for environments where speed
+is a top priority because it consumes less CPU and RAM than other servers.
+
+Installation of Lighttpd packages.
+sudo apt install lighttpd
+
+We allow connections through port 80 with the command:
+sudo ufw allow 80
+
+We check that we have actually allowed it. Port 80 and allow should appear:
+sudo ufw status
+
+We add the rule that includes port 80.
+If you don't remember how to add rules in port forwarding.
+Machine configuration → Network → Port forwarding → Replicate the capture
