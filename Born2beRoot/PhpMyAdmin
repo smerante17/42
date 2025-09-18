@@ -1,0 +1,120 @@
+🔹 1️⃣ Installazione dei pacchetti necessari
+sudo apt update
+sudo apt install -y phpmyadmin php-mbstring php-zip php-gd php-json php-curl
+
+Spiegazione:
+
+phpmyadmin → interfaccia web per gestire MariaDB/MySQL
+
+php-mbstring, php-zip, php-gd, php-json, php-curl → estensioni PHP richieste da phpMyAdmin
+
+Se mancano, phpMyAdmin dà errori o non funziona correttamente
+
+🔹 2️⃣ Collegamento phpMyAdmin al database
+
+Durante l’installazione ti viene chiesto:
+
+Se configurare dbconfig-common → scegli Yes
+
+Questo permette a phpMyAdmin di creare il proprio database (phpmyadmin) su MariaDB e di avere un utente interno per gestirlo.
+
+È più semplice e sicuro, evita di fare tutto manualmente.
+
+Ti chiede la password dell’amministratore MariaDB (root o utente creato)
+
+Serve per creare il database e l’utente phpMyAdmin
+
+🔹 3️⃣ Configurare Lighttpd per phpMyAdmin
+
+Di default, phpMyAdmin si installa in /usr/share/phpmyadmin.
+Lighttpd non crea automaticamente un alias per questa cartella, quindi dobbiamo dirgli di servire quei file.
+
+Crea un alias:
+
+sudo nano /etc/lighttpd/conf-available/10-phpmyadmin.conf
+
+
+Contenuto consigliato:
+
+alias.url += ( "/phpmyadmin" => "/usr/share/phpmyadmin" )
+
+
+Motivo:
+
+/phpmyadmin è l’URL che digiti in browser
+
+/usr/share/phpmyadmin è la cartella reale dei file phpMyAdmin
+
+alias.url dice a Lighttpd di mappare l’URL alla cartella reale
+
+Abilita la configurazione:
+
+sudo lighty-enable-mod phpmyadmin
+sudo systemctl reload lighttpd
+
+
+lighty-enable-mod crea un symlink in conf-enabled → Lighttpd include il file
+
+reload ricarica la configurazione senza stoppare il server
+
+🔹 4️⃣ Controllo dei permessi
+sudo chown -R www-data:www-data /usr/share/phpmyadmin
+sudo chmod -R 755 /usr/share/phpmyadmin
+
+
+Perché:
+
+Lighttpd gira come www-data → deve poter leggere ed eseguire i file
+
+755 sulle cartelle e 644 sui file sono sufficienti
+
+🔹 5️⃣ PHP-FPM deve gestire phpMyAdmin
+
+Verifica che PHP-FPM sia attivo:
+
+sudo systemctl status php8.2-fpm   # o la tua versione
+
+
+Lighttpd usa fastcgi per eseguire PHP → phpMyAdmin è solo un insieme di file PHP
+
+🔹 6️⃣ Verifica in browser
+
+Apri:
+
+http://localhost/phpmyadmin
+
+
+Dovresti vedere la schermata di login di phpMyAdmin
+
+Usa:
+
+Utente root di MariaDB oppure l’utente creato per WordPress (es. gemartin)
+
+La password corrispondente
+
+🔹 7️⃣ Eventuali problemi comuni
+
+Errore Cannot load mbstring o altre estensioni
+
+Installa l’estensione mancante e riavvia PHP-FPM:
+
+sudo apt install php-mbstring
+sudo systemctl restart php8.2-fpm
+sudo systemctl restart lighttpd
+
+
+Errore 403 (Forbidden)
+
+Controlla permessi su /usr/share/phpmyadmin → deve essere leggibile da www-data
+
+Errore 404
+
+Controlla che l’alias sia corretto (/phpmyadmin → /usr/share/phpmyadmin) e che il file di configurazione sia abilitato (conf-enabled/10-phpmyadmin.conf)
+
+💡 Riassunto dei motivi delle scelte:
+
+Passaggio	Motivazione
+dbconfig-common	automatizza la creazione del db di phpMyAdmin
+alias.url	Lighttpd non ha alias predefinito per phpMyAdmin
+permessi 755	Lighttpd deve poter leggere/eseguire i file senza rischio di scrittura da altri utenti
+PHP-FPM	Lighttpd esegue PHP tramite FastCGI, phpMyAdmin è solo file PHP
