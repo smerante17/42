@@ -1,19 +1,19 @@
 WordPress: It is a content management system focused on the creation of any type of website.
 
-To install the latest version of WordPress we must first install wget and zip. To do this we will use the following command:
+To install the latest version of WordPress we must first install wget and zip.
+To do this we will use the following command:
 sudo apt install wget zip
 wget: It is a command line tool used to download files from the web.
-
 zip: It is a command line utility for compressing and decompressing files in ZIP format.
 
-Once we have installed the packages we must locate ourselves in the folder /var/www/ with the command cd we will access it:
-
-Copy
+Once we have installed the packages we must locate ourselves in the folder /var/www/
+with the command cd we will access it:
 cd /var/www/
+
 Once we are in the path /var/www/ we must download the latest version of WordPress.
-As my native language is Spanish I will select the latest version in Spanish. We will use the following command:
+We will use the following command:
 sudo wget https://es.wordpress.org/latest-es_ES.zip
-I could be https://fr.wordpress.org/latest-fr_FR.zip
+It could be https://fr.wordpress.org/latest-fr_FR.zip
 
 Unzip the file you just downloaded with the command:
 sudo unzip latest-en_US.zip
@@ -24,7 +24,8 @@ sudo mv html/ html_old/
 Now we will rename the wordpress folder and call it html:
 sudo mv wordpress/ html
 
-Finally we will set these permissions on the html folder. We will use the command sudo chmod -R 755 html.
+Finally we will set these permissions on the html folder. We will use the command:
+sudo chmod -R 755 html.
 The number 7 indicates that the owner has read, write and execute permissions.
 The number 5 indicates that the group and others only have read and execute permissions.
 sudo chmod -R 755 html
